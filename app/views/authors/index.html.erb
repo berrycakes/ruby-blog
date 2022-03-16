@@ -5,10 +5,9 @@
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Address</th>
-      <th>Date verified</th>
-      <th>Verified</th>
+      <th style="padding: 20px">Name</th>
+      <th style="padding: 20px">Address</th>
+      <th style="padding: 20px">Verified</th>
       <th colspan="4">Actions</th>
     </tr>
   </thead>
@@ -16,10 +15,9 @@
   <tbody>
     <% @authors.each do |author| %>
       <tr>
-        <td><%= author.name %></td>
-        <td><%= author.address %></td>
-        <td><%= author.date_verified %></td>
-        <td><%= author.is_verified ? 'YES' : 'NO' %></td>
+        <td style="text-align:center;"><%= author.name %></td>
+        <td style="text-align:center;"><%= author.address %></td>
+        <td style="text-align:center;"><%= author.is_verified ? author.date_verified : 'not verified'  %></td>
         <td><%= link_to 'Show', author %></td>
         <td><%= link_to 'Edit', edit_author_path(author) %></td>
         <td><%= link_to 'Destroy', author, method: :delete, data: { confirm: 'Are you sure?' } %></td>
