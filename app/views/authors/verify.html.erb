@@ -1,0 +1,21 @@
+<h1>Verifying Author</h1>
+
+<%= form_with(model: @author) do |form| %>
+    <% if @author.is_verified? %>
+    <p>This author is already verified</p>
+    <% else %>
+    <div class="field">
+        <%= form.label :is_verified %>
+        <%= form.select :is_verified, [['No', false], ['Yes', true]] %>
+    </div>
+
+    <div class="field">
+        <%= form.label :date_verified %>
+        <%= form.date_select :date_verified %>
+    </div>
+    <%= form.submit%>
+    <% end %>
+<%end%>
+
+<%= link_to 'Show', @author %> |
+<%= link_to 'Back', authors_path %>

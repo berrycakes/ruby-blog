@@ -1,0 +1,16 @@
+%h1 Articles#index
+%p Find me in app/views/articles/index.html.haml
+
+%table
+    %thead
+        %tr
+            %th Title
+            %th Content
+            %th Action
+    %tbody
+        -@articles.each do |article|
+            %tr
+            %td= article.title
+            %td= article.content
+            %td= link_to 'Delete', article, method: :delete, data: {confirm: 'Are you sure?'}  
+            
