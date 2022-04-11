@@ -10,6 +10,7 @@ module Blog
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
+    config.assets.css_compressor = nil
 
     # Configuration for the application, engines, and railties goes here.
     #
@@ -20,3 +21,4 @@ module Blog
     # config.eager_load_paths << Rails.root.join("extras")
   end
 end
+
