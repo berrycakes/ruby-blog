@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto&display=swap');
+
+@layer components {
+  .btn-primary {
+    @apply uppercase text-title text-gray-700 py-3 px-8 bg-biloba-flower-400 rounded-full
+    hover:-translate-y-1 hover:scale-110 hover:bg-biloba-flower-500 duration-300;
+  }
+  .btn-secondary {
+    @apply py-2 px-4 bg-carnation-pink-300 rounded-lg
+     hover:scale-110 hover:bg-carnation-pink-400 duration-300;
+  }
+  .nav-li {
+    @apply flex items-center;
+  }
+  .navlink {
+    @apply font-title text-lg py-2 px-4 text-gray-600 
+    hover:text-carnation-pink-600  hover:underline hover:bg-transparent
+    visited:text-gray-600
+    transition ease-in-out duration-500;
+  }
+  a {
+    @apply hover:text-carnation-pink-600  hover:underline hover:bg-transparent
+    visited:text-gray-600
+    transition ease-in-out duration-500;
+  }
+  h3 {
+    @apply text-3xl font-semibold font-title text-carnation-pink-600;
+  }
+  h1 {
+    @apply uppercase text-4xl font-bold font-title text-gray-700;
+  }
+  main {
+    @apply mt-10 flex-col;
+  }
+  .subtitle {
+    @apply text-sm italic text-carnation-pink-500;
+  }
+  table {
+    @apply min-w-full divide-y divide-gray-400 table-fixed text-center;
+  }
+  thead {
+    @apply bg-carnation-pink-400 text-center;
+  }
+  th {
+    @apply py-3 px-3 text-xs font-medium tracking-wider text-center text-gray-700 uppercase;
+  }
+  tbody {
+    @apply bg-white divide-y divide-gray-200;
+  }
+  .table__row {
+    @apply hover:bg-carnation-pink-200
+    transition ease-out duration-300;
+  }
+  td {
+    @apply py-4 px-6 text-sm text-gray-700 whitespace-nowrap;
+  }
+  .table__row--link {
+    @apply px-0;
+  }
+}

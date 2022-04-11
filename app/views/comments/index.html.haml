@@ -1,0 +1,18 @@
+%h2= @article.title
+
+%h2 Comments
+
+%div{:class => "my-5 flex-col"}
+    %div{:class => "overflow-x-auto shadow-md sm:rounded-lg" }
+        %div{:class => "inline-block min-w-full align-middle"}
+            %div{:class => "overflow-hidden"}
+                %table
+                    %thead
+                        %tr
+                            %th Comment Body
+                            -# %th{ :colspan => "4"} Actions
+                    %tbody
+                        -@comments.each do |comment|
+                            %tr{:class => "table__row"}
+                                %td= comment.body
+        

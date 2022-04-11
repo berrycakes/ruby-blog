@@ -26,6 +26,11 @@
     <%= form.date_select :date_verified, include_blank: true %>
   </div>
 
+     <div class="field">
+        <%= form.label :is_verified %>
+        <%= form.select :is_verified, [['No', false], ['Yes', true]] %>
+    </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>

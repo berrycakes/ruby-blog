@@ -4,9 +4,9 @@ Rails.application.routes.draw do
   # get 'articles/new'
   # get 'articles/edit'
   resources :authors
-  resources :articles
-  get 'authors/:id/verify', to: 'authors#verify', as: 'verify_author'
-  patch 'authors/:id', to: 'authors#update'
+  # resources :articles
+  patch 'authors/:id/verify', to: 'authors#verify', as: 'verify_author'
+  # patch 'authors/:id/verify', to: 'authors#update'
 
   # get '/articles', to: 'articles#index', as: 'articles'
   # post 'articles', to: 'articles#create'
@@ -15,6 +15,10 @@ Rails.application.routes.draw do
   # get 'articles/:id', to: 'articles#show', as: 'article'
   # patch 'articles/:id', to: 'articles#update'
   # delete 'articles/:id', to: 'articles#destroy'
+
+  resources :articles do 
+    resources :comments
+  end
   
 
   root to: 'articles#index'

@@ -19,7 +19,10 @@ class AuthorsController < ApplicationController
   def edit
   end
 
+  # PATCH /authors/:id/verify
   def verify
+    @author.update(:is_verified => true, :date_verified => Date.today)
+    redirect_to authors_path
   end
 
   # POST /authors or /authors.json
@@ -70,4 +73,5 @@ class AuthorsController < ApplicationController
     def author_params
       params.require(:author).permit(:name, :address, :date_verified, :is_verified)
     end
+
 end

@@ -10,10 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_15_122526) do
+ActiveRecord::Schema.define(version: 2022_03_28_124159) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "advertisements", force: :cascade do |t|
+    t.string "title"
+    t.string "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "article_advertisements", force: :cascade do |t|
+    t.date "advertisement_date"
+    t.bigint "article_id", null: false
+    t.bigint "advertisement_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["advertisement_id"], name: "index_article_advertisements_on_advertisement_id"
+    t.index ["article_id"], name: "index_article_advertisements_on_article_id"
+  end
 
   create_table "articles", force: :cascade do |t|
     t.string "title"
@@ -31,4 +48,15 @@ ActiveRecord::Schema.define(version: 2022_03_15_122526) do
     t.boolean "is_verified"
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.string "body"
+    t.bigint "article_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["article_id"], name: "index_comments_on_article_id"
+  end
+
+  add_foreign_key "article_advertisements", "advertisements"
+  add_foreign_key "article_advertisements", "articles"
+  add_foreign_key "comments", "articles"
 end

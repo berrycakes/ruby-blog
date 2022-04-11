@@ -1,16 +1,29 @@
-%h1 Articles#index
-%p Find me in app/views/articles/index.html.haml
+%h1 Articles
+%p{:class => "subtitle"} Find me in app/views/articles/index.html.haml
 
-%table
-    %thead
-        %tr
-            %th Title
-            %th Content
-            %th Action
-    %tbody
-        -@articles.each do |article|
-            %tr
-            %td= article.title
-            %td= article.content
-            %td= link_to 'Delete', article, method: :delete, data: {confirm: 'Are you sure?'}  
-            
+-# %img{src:image_path('dog.jpeg')}
+
+%div{:class => "my-5 flex-col"}
+    %div{:class => "overflow-x-auto shadow-md sm:rounded-lg" }
+        %div{:class => "inline-block min-w-full align-middle"}
+            %div{:class => "overflow-hidden"}
+                %table
+                    %thead
+                        %tr
+                            %th Title
+                            %th Content
+                            %th Comment COunt
+                            %th{ :colspan => "4"} Actions
+                    %tbody
+                        -@articles.each do |article|
+                            %tr{:class => "table__row"}
+                                %td{:class => "capitalize"}= article.title
+                                %td= article.content
+                                %td= article.comments.count 
+                                %td= link_to 'Comments', article_comments_path(article.id)
+                                %td{:class=>"table__row--link"}=link_to 'view', article 
+                                %td{:class=>"table__row--link"}=link_to 'edit', edit_article_path(article)
+                                %td{:class=>"table__row--link"}=link_to 'delete', article, method: :delete, data: {confirm: 'Are you sure?'}  
+
+%div{:class => "w-full flex justify-center mt-10"}
+    %button{:class => "btn-primary"}=  link_to 'Create New Article', new_article_path            
