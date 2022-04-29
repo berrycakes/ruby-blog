@@ -9,8 +9,9 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Roboto'],
-        title: ['Montserrat'],
+        sans: ['Roboto', 'sans-serif'],
+        title: ['Montserrat', 'sans-serif'],
+        serif: ['Spectral', 'serif'],
       },
       colors: {
         'carnation-pink': {

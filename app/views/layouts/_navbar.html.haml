@@ -1,0 +1,19 @@
+%body
+  %header
+    %nav.container.grid.grid-cols-3.align-middle.py-8.mx-auto.bg-white.w-full
+      .flex.flex-row.justify-left.col-span-2
+        %img.object-contain.h-8{:src => "https://img.icons8.com/dusk/344/ruby-gemstone.png"}/
+        %h3 Ruby Blog
+        %ul.flex.justify-end.align-middle
+          %li.nav-li
+            = link_to "Articles", articles_path, class: "navlink"
+          %li.nav-li
+            = link_to "Authors", authors_path, class: "navlink"
+          %li.nav-li
+            = link_to "Purchases", purchases_path, class: "navlink"
+      .flex.flex-row.items-center.justify-end
+        = button_to new_purchase_path, method: :get do
+          %h3.text-xl
+            = "#{current_user.get_gem_balance}"
+            %i.bi.bi-gem
+        = link_to "Sign Out", destroy_user_session_path, method: :delete,  class: "navlink"

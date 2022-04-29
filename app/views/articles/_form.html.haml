@@ -1,0 +1,8 @@
+- if @article.errors.any?
+  - @article.errors.each do |error|
+    %p= error.full_message
+= form_with model: @article do |form|
+  = form.text_field :title, :placeholder => "Enter title...", :class => "input-text-field-title"
+  = form.rich_text_area :content, :placeholder => "Your content here...", :class => "rich-text-editor"
+  = form.hidden_field :author_id, :value => current_user.author.id
+  = form.submit class: "submit-btn-primary"

@@ -1,0 +1,2 @@
+class FollowedAuthor < ApplicationRecord
+end

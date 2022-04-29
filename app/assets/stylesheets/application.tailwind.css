@@ -2,42 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@400;500;700;900&family=Spectral:wght@300&display=swap');
 
-@layer components {
-  .btn-primary {
-    @apply uppercase font-title text-gray-700 py-3 px-8 bg-biloba-flower-400 rounded-full
-    hover:-translate-y-1 hover:scale-110 hover:bg-biloba-flower-500 duration-300;
-  }
-  .btn-secondary {
-    @apply py-2 px-4 bg-carnation-pink-300 rounded-lg
-     hover:scale-110 hover:bg-carnation-pink-400 duration-300;
-  }
-  .nav-li {
-    @apply flex items-center;
-  }
-  .navlink {
-    @apply font-title text-lg py-2 px-4 text-gray-600 
-    hover:text-carnation-pink-600  hover:underline hover:bg-transparent
-    visited:text-gray-600
-    transition ease-in-out duration-500;
+@layer base {
+  i {
+    @apply h-5 w-5 stroke-2 stroke-gray-500
   }
   a {
-    @apply hover:text-carnation-pink-600  hover:underline hover:bg-transparent
-    visited:text-gray-600
-    transition ease-in-out duration-500;
+    @apply visited:text-gray-600;
+  }
+  a:hover {
+    @apply text-carnation-pink-600 underline bg-transparent transition ease-in-out duration-500;
   }
   h3 {
-    @apply text-3xl font-semibold font-title text-carnation-pink-600;
+    @apply text-3xl font-semibold font-title text-carnation-pink-500;
   }
   h1 {
     @apply uppercase text-4xl font-bold font-title text-gray-700;
   }
+  h4 {
+    @apply uppercase text-lg font-bold font-title text-gray-500 mb-4;
+  }
+  h5 {
+    @apply text-lg font-bold font-title text-gray-600 mb-2;
+  }
   main {
     @apply mt-10 flex-col;
-  }
-  .subtitle {
-    @apply text-sm italic text-carnation-pink-500;
   }
   table {
     @apply min-w-full divide-y divide-gray-400 table-fixed text-center;
@@ -51,14 +41,156 @@
   tbody {
     @apply bg-white divide-y divide-gray-200;
   }
-  .table__row {
-    @apply hover:bg-carnation-pink-200
-    transition ease-out duration-300;
-  }
   td {
     @apply py-4 px-6 text-sm text-gray-700 whitespace-nowrap;
   }
+
+  
+}
+@layer components {
+  .submit-btn-primary {
+    @apply rounded-lg py-3 px-5 border-2 border-carnation-pink-600 text-carnation-pink-600 inline-block font-medium cursor-pointer
+  }
+  .submit-btn-primary:hover {
+    @apply  scale-110 bg-carnation-pink-600 text-white duration-100;
+  }
+
+  .submit-btn-muted {
+    @apply rounded-lg py-3 px-5 border-2 border-gray-400 text-gray-500 inline-block font-medium cursor-pointer
+  }
+  .submit-btn-muted:hover {
+    @apply  scale-110 bg-carnation-pink-600 border-carnation-pink-600 text-white duration-100;
+  }
+
+
+  .btn-primary {
+    @apply uppercase font-title text-gray-700 py-3 px-8 bg-biloba-flower-400 rounded-full;
+  }
+  .btn-primary:hover {
+    @apply translate-y-1 scale-110 bg-biloba-flower-500 duration-300;
+  }
+
+  .btn-secondary {
+    @apply py-2 px-4 bg-carnation-pink-300 rounded-lg;
+  }
+  .btn-secondary:hover {
+    @apply scale-110 bg-carnation-pink-400 duration-300;
+  }
+  .nav-li {
+    @apply flex items-center;
+  }
+  .navlink {
+    @apply font-title text-lg py-2 px-4 text-gray-600 visited:text-gray-600;
+   
+  }
+
+  .navlink:hover {
+    @apply text-carnation-pink-600  underline bg-transparent  transition ease-in-out duration-500;
+  }
+ 
+  .subtitle {
+    @apply text-sm italic text-carnation-pink-500;
+  }
+ 
+  .table__row:hover {
+    @apply bg-carnation-pink-200 transition ease-out duration-300;
+  }
+ 
   .table__row--link {
     @apply px-0;
   }
+
+  .label-styled {
+    @apply block mb-2 text-gray-500 font-bold 
+  }
+
+  .label-span-styled {
+    @apply inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 rounded-l-md border border-r-0 border-gray-300
+  }
+  .input-text-field-half {
+    @apply rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500  block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  
+  }
+  .input-text-field-half:hover {
+    @apply border-blue-500
+  }
+
+  .input-text-field {
+    @apply rounded-lg bg-gray-50 border text-gray-900 focus:ring-blue-500  block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  
+  }
+  .input-text-field:hover {
+    @apply border-blue-500
+  }
+
+  #user_payment_method_country {
+    @apply rounded-lg bg-gray-50 border text-gray-600 focus:ring-blue-500  block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  
+  }
+
+  .input-text-field-title {
+    @apply block mb-3 flex-1 min-w-0 w-full text-3xl text-gray-600 font-title border-none border-transparent focus:ring-0 outline-none}
+
+  .input-text-field-title:focus {
+    @apply ring-transparent outline-none
+  }
+
+  .input-text-field-title::placeholder {
+    @apply text-gray-400 font-title
+  }
+
+  .rich-text-editor {
+    @apply rounded-lg text-gray-500  block flex-1 min-w-0 w-full border-gray-300 p-2.5 h-full
+  }
+
+  .create-article-container {
+    @apply h-full w-3/5 m-auto
+  }
+
+  .split-container {
+    @apply grid h-full grid-cols-2 gap-4 place-content-center items-center  text-gray-800
+  }
+
+  .form-container {
+    @apply m-auto w-3/5
+  }
+
+  .page-container {
+    @apply mx-auto w-full
+  }
+
+  .page-title {
+    @apply font-bold text-2xl
+  }
+
+  .radio-button-group {
+    @apply grayscale flex flex-col justify-center align-middle items-center border-2 p-3 rounded-lg border-carnation-pink-400 mb-5 peer-checked:grayscale-0
+  }
+
+  .radio-button-group:hover {
+    @apply transition duration-300 ease-in-out grayscale-0 scale-110 -translate-y-3
+  }
+
+  .radio-image {
+    @apply  w-36 m-auto 
+  }
+
+  .purchased-item {
+    @apply flex flex-col justify-center align-middle items-center border-2 p-3 rounded-lg border-carnation-pink-400 mb-5 w-fit
+  }
+
+  .iframe-container {
+    @apply w-[600px] h-[350px] m-3  border-2 p-5 pt-10 rounded-lg border-gray-300 shadow-xl flex justify-center items-center
+  }
+
+  .small-card {
+    @apply  p-3 text-carnation-pink-600 inline-block text-right
+  }
+
+  .article-content-container {
+    @apply my-5 py-5 font-serif text-lg
+  }
+
+  .blog-card {
+    @apply  border-b border-gray-300 p-5 grid grid-cols-3
+  }
+
+  
 }

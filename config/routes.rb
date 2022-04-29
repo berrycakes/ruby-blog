@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
   
-  # get 'articles/show', to:
-  # get 'articles/new'
-  # get 'articles/edit'
+  resources :user_payment_methods
+  resources :purchases
+  get 'home/index'
+  devise_for :users
   resources :authors
-  # resources :articles
+
   patch 'authors/:id/verify', to: 'authors#verify', as: 'verify_author'
+
+  post 'articles/:id/update_gems', to: 'articles#update_gems', as: 'update_gem_article'
   # patch 'authors/:id/verify', to: 'authors#update'
 
   # get '/articles', to: 'articles#index', as: 'articles'

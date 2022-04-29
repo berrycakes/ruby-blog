@@ -1,0 +1,31 @@
+.create-article-container
+  %h1= @article.title
+  .grid.grid-cols-5.w-full.items-center
+    .small-card.col-span-2.text-left.px-5.text-xl
+      - if !@article.article_owner(current_user)
+        = link_to "@#{@article.get_author.handle}", author_path(@article.get_author)
+      - else
+        = link_to 'edit', edit_article_path(@article)
+      %p= @article.get_article_date
+    .small-card.col-span-2
+      = "#{@article.total_gem_transfers}"
+      %i.bi.bi-gem
+      = "total"
+    - if !@article.article_owner(current_user)
+      .col-span-1
+        = button_to  update_gem_article_path, method: :post do
+          - if @article.user_gem_transfers(current_user) == 0
+            .submit-btn-muted.border
+              %i.bi.bi-gem
+              = "#{@article.user_gem_transfers(current_user)}"
+          - else
+            .submit-btn-primary.border.px-2
+              %i.bi.bi-gem
+              = "#{@article.user_gem_transfers(current_user)}"
+      .col-start-4.col-span-2
+        - if notice.present?
+          %p.py-2.px-3.bg-green-50.mb-5.text-green-500.font-medium.rounded-lg.inline-block#notice
+            = notice
+  .article-content-container
+    %span= @article.content
+  = link_to 'Go to articles page', articles_path

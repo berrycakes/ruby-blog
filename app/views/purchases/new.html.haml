@@ -1,0 +1,50 @@
+%h4 Purchase gems
+-# %p= current_user.gem
+= form_with(model: @purchase, class: "contents") do |form|
+  - if @purchase.errors.any?
+    .bg-red-50.text-red-500.px-3.py-2.font-medium.rounded-lg.mt-3#error_explanation
+      %ul
+        - @purchase.errors.each do |error|
+          %li= error.full_message
+  = form.hidden_field :user_id, :value => current_user.id
+  = form.hidden_field :status, :value => "awaiting_next_action"
+  .split-container
+    .form-container.w-full
+      .grid.grid-cols-3.gap-5
+        %label{:for => "purchase_gem_20"}
+          = form.radio_button :gem, 20, :checked => true, :class => "peer sr-only"
+          .radio-button-group
+            %img.radio-image{:src => "https://res.cloudinary.com/dbegssigw/image/upload/v1650962389/ruby%20blog/1_vjxjpg.png"}/
+            %h3 20 gems
+            %h4 ₱ 100.00
+        %label{:for => "purchase_gem_50"}
+          = form.radio_button :gem, 50, :class => "peer sr-only"
+          .radio-button-group
+            %img.radio-image{:src => "https://res.cloudinary.com/dbegssigw/image/upload/v1650962389/ruby%20blog/2_trg1st.png"}/
+            %h3 50 gems
+            %h4 ₱ 250.00
+        %label{:for => "purchase_gem_100"}
+          = form.radio_button :gem, 100, :class => "peer sr-only"
+          .radio-button-group
+            %img.radio-image{:src => "https://res.cloudinary.com/dbegssigw/image/upload/v1650962389/ruby%20blog/3_kocapb.png"}/
+            %h3 100 gems
+            %h4 ₱ 500.00
+    .form-container
+      .grid.grid-cols-3.mb-5
+        .field.col-span-3
+          %h4= "Card Information"
+        .field.col-span-3.mx-3
+          = form.telephone_field :ccn, :class => "input-text-field", :placeholder => "4120000000000007"
+        .field.col-span-1.mx-3
+          = form.number_field :expm, :class => "input-text-field", :placeholder => "MM", :min => 1, :max => 12
+        .field.col-span-1.mx-3
+          = form.number_field :expy, :class => "input-text-field", :placeholder => "YY", :min => 00, :max => 99
+        .field.col-span-1.mx-3
+          = form.number_field :cvc, :class => "input-text-field", :placeholder => "CVC", :min => 000, :max => 999
+      - if current_user.user_payment_method
+        = render 'user_payment_methods/show', user_payment_method: current_user.user_payment_method
+      - else
+        .p-5
+          = link_to "Add Billing Information", new_user_payment_method_path
+  .inline.mx-auto
+    = form.submit "Confirm Transaction", id: "process-payment-button", class: "submit-btn-primary"

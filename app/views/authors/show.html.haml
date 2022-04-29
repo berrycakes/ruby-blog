@@ -1,0 +1,13 @@
+%p#notice= notice
+%p
+  %strong Name:
+  = @author.name
+%p
+  %strong Handle:
+  = @author.handle
+%p
+  %strong Author Verification:
+  = @author.is_verified ? ('This author was verified on ' + @author.date_verified.to_s)  : 'Author is not verified.'
+= link_to 'Edit', edit_author_path(@author)
+|
+= link_to 'Back', authors_path

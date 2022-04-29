@@ -1,0 +1,48 @@
+.mx-auto.w-full.h-full.flex.flex-col
+  - if notice.present?
+    %p.py-2.px-3.bg-green-50.mb-5.text-green-500.font-medium.rounded-lg.inline-block#notice
+      = notice
+  .w-full
+    - @purchase.get_payment_status
+    - if @purchase.payment_id && @purchase.status == "awaiting_next_action"
+      .flex.justify-center
+        %iframe.iframe-container{:src => @purchase.get_authorization_url}
+          %p Paymongo authorization page
+    .grid
+      %h4 Purchase Details
+      .field.col-span-2
+        - case @purchase.gem
+        - when 20
+          .purchased-item
+            %img.radio-image{:src => "https://res.cloudinary.com/dbegssigw/image/upload/v1650962389/ruby%20blog/1_vjxjpg.png"}/
+            .label-styled= "20 gems"
+            .label-styled= "₱ 100.00"
+        - when 50
+          .purchased-item
+            %img.radio-image{:src => "https://res.cloudinary.com/dbegssigw/image/upload/v1650962389/ruby%20blog/2_trg1st.png"}/
+            .label-styled= "50 gems"
+            .label-styled= "₱ 250.00"
+        - when 100
+          .purchased-item
+            %img.radio-image{:src => "https://res.cloudinary.com/dbegssigw/image/upload/v1650962389/ruby%20blog/3_kocapb.png"}/
+            .label-styled= "100 gems"
+            .label-styled= "₱ 500.00"
+    .grid
+      %h4 Payment Status
+      .field.col-span-2
+        - if @purchase.get_payment_status == 'awaiting_next_action'
+          .label-styled= "Awaiting next action"
+        - elsif @purchase.get_payment_status == 'succeeded'
+          .label-styled= "Transaction successful"
+          .label-styled= @purchase.get_payment_status_date
+        - elsif @purchase.get_payment_status == 'awaiting_payment_method'
+          .label-styled
+            = "There has been an error in your payment method. Please try again."
+          .label-styled= @purchase.get_payment_status_date
+        - elsif @purchase.status == 'cannot_submit_payment_intent'
+          .label-styled= "Cannot authorize this transaction."
+          %p.m-2
+            = "Please make sure that the information you provided is correct."
+          = link_to "Back", new_purchase_url
+        - else
+          %p= @purchase.status

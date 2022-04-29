@@ -1,7 +1,6 @@
 %p{:id=>"notice"}= notice 
 
 %h1 Authors
-%p{:class => "subtitle"} Find me in app/views/authors/index.html.haml
 
 %div{:class => "my-5 flex-col"}
     %div{:class => "overflow-x-auto shadow-md sm:rounded-lg" }
@@ -11,14 +10,14 @@
                     %thead
                         %tr
                             %th Name
-                            %th Address
+                            %th Handle
                             %th Verified
                             %th{ :colspan => "4"} Actions
                     %tbody
                         -@authors.each do |author|
                             %tr{:class => "table__row"}
                                 %td{:class => "capitalize"}= author.name
-                                %td= author.address
+                                %td= author.handle
                                 -if author.is_verified 
                                     %td= author.date_verified
                                 -else
@@ -28,5 +27,6 @@
                                 %td{:class=>"table__row--link"}=link_to 'edit', edit_author_path(author) 
                                 %td{:class=>"table__row--link"}=link_to 'delete', author, method: :delete, data: { confirm: 'Are you sure?' } 
                                 %td{:class=>"table__row--link"}=link_to 'verify', verify_author_path(author) 
-%div{:class => "w-full flex justify-center mt-10"}
-    %button{:class => "btn-primary"}=  link_to 'Create New Author', new_author_path 
+- if !current_user.author
+    %div{:class => "w-full flex justify-center mt-10"}
+        %button{:class => "btn-primary"}=  link_to 'Create Your Author Profile', new_author_path 

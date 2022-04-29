@@ -1,0 +1,28 @@
+= form_with(model: author) do |form|
+  - if author.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(author.errors.count, "error")
+        prohibited this author from being saved:
+      %ul
+        - author.errors.each do |error|
+          %li= error.full_message
+  .field
+    = form.label :name, :class => "label-styled"
+    = form.text_field :name, :class => "input-text-field"
+  .field
+    = form.label :handle, :class => "label-styled"
+    .flex
+      %span.label-span-styled @
+      = form.text_field :handle, :class => "input-text-field-half"
+  .field
+    = form.hidden_field :date_verified, :value => DateTime.now
+  .field
+    = form.hidden_field :user_id, :value => current_user.id
+  .field.flex.flex-row.items-center
+    = form.check_box :is_verified, :class => "p-2 m-2"
+    = form.label "Display as verified author?"
+  .actions
+    = form.submit
+
+  

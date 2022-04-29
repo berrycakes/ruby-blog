@@ -1,0 +1,7 @@
+%h1 CREATE AUTHOR PROFILE
+.split-container
+    .form-container
+        = render 'form', author: @author
+        = link_to 'Back', authors_path
+    .image-container
+        %img.w-full(src = "https://res.cloudinary.com/dbegssigw/image/upload/v1650808637/ruby%20blog/undraw_placeholders_re_pvr4_sfdhx9.svg")

@@ -1,0 +1,41 @@
+= form_with(model:  user_payment_method) do |form|
+  - if  user_payment_method.errors.any?
+    #error_explanation
+      %h2
+        = pluralize( user_payment_method.errors.count, "error")
+        prohibited this  user_payment_method from being saved:
+      %ul
+        - user_payment_method.errors.each do |error|
+          %li= error.full_message
+  .field
+    = form.hidden_field :user_id, :value => current_user.id
+    = form.hidden_field :email, :value => current_user.email
+  .grid.grid-cols-5.gap-3
+    .field.col-span-3
+      = form.label :name, :class => "label-styled"
+      = form.text_field :name, :class => "input-text-field"
+    .field.col-span-2
+      = form.label :phone, :class => "label-styled"
+      = form.telephone_field :phone, :class => "input-text-field"
+  .field
+    = form.label "Address Line 1", :class => "label-styled"
+    = form.text_field :line1, :class => "input-text-field"
+  .field
+    = form.label "Address Line 2", :class => "label-styled"
+    = form.text_field :line2, :class => "input-text-field"
+  .grid.grid-cols-2.gap-3
+    .field.col-span-1
+      = form.label :city, :class => "label-styled"
+      = form.text_field :city, :class => "input-text-field"
+    .field.col-span-1
+      = form.label :postal_code, :class => "label-styled"
+      = form.number_field :postal_code, :class => "input-text-field"
+  .grid.grid-cols-2.gap-3
+    .field.col-span-1
+      = form.label :state, :class => "label-styled"
+      = form.text_field :state, :class => "input-text-field"
+    .field.col-span-1
+      = form.label :country, :class => "label-styled"
+      = form.country_select :country, ([ "PH" ]), :class => "input-select-field"
+  .actions
+    = form.submit

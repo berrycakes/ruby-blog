@@ -1,0 +1,14 @@
+%h4 Billing Information
+.container.pl-5
+  %h5= user_payment_method.name
+  %p= user_payment_method.line1
+  %p= user_payment_method.line2
+  %p
+    = "#{user_payment_method.city}, #{user_payment_method.state}, #{user_payment_method.postal_code}"
+  %p= user_payment_method.country
+  .flex.flex-row
+    %i.bi.bi-envelope.icon
+    %p= current_user.email
+  .flex.flex-row
+    %i.bi.bi-telephone
+    %p= user_payment_method.phone

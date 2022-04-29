@@ -9,15 +9,16 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%# <% custom_havascript_helper %> %>
-    
-    <%# <% end %> %>
   </head>
 
   <body>
-    <%= render "layouts/navbar" %>
+    <% if user_signed_in? %>
+      <%= render "layouts/navbar" %>
+    <% else %>
+      <a href="/users/sign_in"> Sign In </a>
+    <% end %>
     <main class="container mx-auto mt-10 px-5 flex-col">
-      <%= yield %>
+          <%= yield %>
     </main>
   </body>
 </html>

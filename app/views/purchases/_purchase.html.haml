@@ -1,0 +1,16 @@
+%table
+  %thead
+    %tr
+      %th ID
+      %th Status
+      %th Date
+      %th Gem
+  %tbody
+    - @purchases.each do |purchase|
+      %tr.table__row
+        %td
+          = link_to purchase do
+            = purchase.payment_id
+        %td= purchase.status
+        %td= purchase.updated_at
+        %td= purchase.gem

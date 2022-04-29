@@ -1,29 +1,25 @@
-%h1 Articles
-%p{:class => "subtitle"} Find me in app/views/articles/index.html.haml
-
--# %img{src:image_path('dog.jpeg')}
-
-%div{:class => "my-5 flex-col"}
-    %div{:class => "overflow-x-auto shadow-md sm:rounded-lg" }
-        %div{:class => "inline-block min-w-full align-middle"}
-            %div{:class => "overflow-hidden"}
-                %table
-                    %thead
-                        %tr
-                            %th Title
-                            %th Content
-                            %th Comment COunt
-                            %th{ :colspan => "4"} Actions
-                    %tbody
-                        -@articles.each do |article|
-                            %tr{:class => "table__row"}
-                                %td{:class => "capitalize"}= article.title
-                                %td= article.content
-                                %td= article.comments.count 
-                                %td= link_to 'Comments', article_comments_path(article.id)
-                                %td{:class=>"table__row--link"}=link_to 'view', article 
-                                %td{:class=>"table__row--link"}=link_to 'edit', edit_article_path(article)
-                                %td{:class=>"table__row--link"}=link_to 'delete', article, method: :delete, data: {confirm: 'Are you sure?'}  
-
-%div{:class => "w-full flex justify-center mt-10"}
-    %button{:class => "btn-primary"}=  link_to 'Create New Article', new_article_path            
+.create-article-container
+  - if notice.present?
+    %p.py-2.px-3.bg-green-50.mb-5.text-green-500.font-medium.rounded-lg.inline-block#notice
+      = notice
+  %h1= "Articles"
+  %p= @random_quote
+  .my-5.flex-col
+    - @articles.each do |article|
+      .blog-card
+        .col-span-2
+          = link_to article do
+            %h4= article.title
+          %p= article.get_article_date
+          - if !article.article_owner(current_user)
+            = link_to "@#{article.get_author.handle}", author_path(article.get_author)
+          - else
+            = link_to 'edit', edit_article_path(article)
+        .col-span-1
+          .small-card.col-span-2
+            = "#{article.total_gem_transfers}"
+            %i.bi.bi-gem
+          -# - else
+          -# .submit-btn-primary.border.px-2
+          -# %i.bi.bi-gem
+          -# = "#{article.user_gem_transfers(current_user)}"
