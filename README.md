@@ -9,13 +9,13 @@
 <br />
 <div align="center">
   <a href="https://github.com/berrycakes/ruby-blog">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="https://img.icons8.com/dusk/344/ruby-gemstone.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">Best-README-Template</h3>
+  <h3 align="center">Ruby Blog</h3>
 
   <p align="center">
-    An awesome README template to jumpstart your projects!
+    Rewards-based blogging app
     <br />
     <a href="https://github.com/berrycakes/ruby-blog"><strong>Explore the docs »</strong></a>
     <br />
@@ -58,34 +58,21 @@
 
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+![Product Name Screen Shot][product-screenshot]
 
-There are many great README templates available on GitHub; however, I didn't find one that really suited my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
-
-Here's why:
-
-- Your time should be focused on creating something amazing. A project that solves a problem and helps others
-- You shouldn't be doing the same tasks over and over like creating a README from scratch
-- You should implement DRY principles to the rest of your life :smile:
-
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have contributed to expanding this template!
-
-Use the `BLANK_README.md` to get started.
+Ruby blog aims to utilize its in-app currency, _gems_ to incentivize brilliant authors. It uses [PayMongo](https://www.paymongo.com/), as a payment gateway to enable users to buy gems and show support for their favorite authors.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ### Built With
 
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
+- [Ruby on Rails](https://rubyonrails.org/)
 
-- [Next.js](https://nextjs.org/)
-- [React.js](https://reactjs.org/)
-- [Vue.js](https://vuejs.org/)
-- [Angular](https://angular.io/)
-- [Svelte](https://svelte.dev/)
-- [Laravel](https://laravel.com)
-- [Bootstrap](https://getbootstrap.com)
-- [JQuery](https://jquery.com)
+### Dependencies
+
+`ruby 3.0.3`
+
+`Rails 6.1.5`
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -93,34 +80,41 @@ This section should list any major frameworks/libraries used to bootstrap your p
 
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
-
-### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
-
-- npm
-  ```sh
-  npm install npm@latest -g
-  ```
+To get a local copy up and running, do the following:
 
 ### Installation
 
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
+1. Clone the repo
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
    ```sh
-   git clone https://github.com/your_username_/Project-Name.git
+   git clone https://github.com/berrycakes/ruby-blog.git
    ```
-3. Install NPM packages
+
+2. Install bundle packages
    ```sh
-   npm install
+   bundle install
    ```
-4. Enter your API in `config.js`
+3. Install yarn packages
+   ```sh
+   yarn install
+   ```
+4. Migrate the database
+   ```sh
+   rails db:migrate
+   ```
+
+### Using your own API Keys
+
+1. Register for a free API Key at [https://www.paymongo.com/developers](https://www.paymongo.com/developers)
+
+2. Open `credentials.yml` in VS code
+   ```sh
+   EDITOR='code --wait' rails credentials:edit
+   ```
+3. Append your API Keys in `credentials.yml`
    ```js
-   const API_KEY = 'ENTER YOUR API'
+   PUBLIC_KEY = 'ENTER YOUR PUBLIC KEY'
+   SECRET_KEY = 'ENTER YOUR SECRET KEY'
    ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -129,9 +123,29 @@ _Below is an example of how you can instruct your audience on installing and set
 
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+4 API endpoints are wrapped in [client.rb](app/api/Payment/client.rb)
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+1. ` Payment::Client.payment_intent(amount)`
+
+   **_POST_**: Accepts `amount` as parameter and returns `payment_intent_id`
+
+2. ` Payment::Client.payment_method(card, user)`
+
+   **_POST_**: Accepts `card` and `user` as parameter and returns `payment_method_id`
+
+3. ` Payment::Client.attach_payment_intent`
+
+   **_POST_**: Uses `payment_intent_id` and `payment_method_id` as parameter and returns `redirect_url` which contains the authorization page from PayMongo
+
+4. ` Payment::Client.get_payment_intent`
+
+   **_GET_**: Uses `payment_intent_id` as parameter and returns payment `status`
+
+### Flow Chart for Card Payment Requests
+
+![PayMongo Flow][paymongo-screenshot]
+
+_This figure shows how to use the payment method API together with the payment intent API. For more examples, please refer to the [Documentation](https://developers.paymongo.com/docs)_
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -139,40 +153,17 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 ## Roadmap
 
-- [x] Add Changelog
-- [x] Add back to top links
-- [ ] Add Additional Templates w/ Examples
-- [ ] Add "components" document to easily copy & paste sections of the readme
-- [ ] Multi-language Support
-  - [ ] Chinese
-  - [ ] Spanish
+- [x] Add PayMongo Test API
+- [x] Add rich text format editor for creating new articles
+- [ ] Display scenario specific errors for card validation
+- [ ] Add additional features for UI
+- [ ] Add follow button and track number of followers
+- [ ] Add tiers for authors
+  - [ ] pearl
+  - [ ] diamond
+  - [ ] ruby
 
 See the [open issues](https://github.com/berrycakes/ruby-blog/issues) for a full list of proposed features (and known issues).
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-<!-- CONTRIBUTING -->
-
-## Contributing
-
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-<!-- LICENSE -->
-
-## License
-
-Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -180,9 +171,9 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 ## Contact
 
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
+Jianne Gabriel - [@jianneberrycakes](https://twitter.com/jianneberrycakes) - jiannegabriel.com
 
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
+Project Link: [https://github.com/your_username/repo_name](https://github.com/berrycakes/ruby-blog)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -190,21 +181,11 @@ Project Link: [https://github.com/your_username/repo_name](https://github.com/yo
 
 ## Acknowledgments
 
-Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
-
-- [Choose an Open Source License](https://choosealicense.com)
-- [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-- [Malven's Flexbox Cheatsheet](https://flexbox.malven.co/)
-- [Malven's Grid Cheatsheet](https://grid.malven.co/)
-- [Img Shields](https://shields.io)
-- [GitHub Pages](https://pages.github.com)
-- [Font Awesome](https://fontawesome.com)
-- [React Icons](https://react-icons.github.io/react-icons/search)
+- [Tailwind](https://tailwindcss.com/)
+- [Bootstrap Icons](https://icons.getbootstrap.com/)
+- [PayMongo](https://www.paymongo.com/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
 [contributors-shield]: https://img.shields.io/github/contributors/berrycakes/ruby-blog.svg?style=for-the-badge
 [contributors-url]: https://github.com/berrycakes/ruby-blog/graphs/contributors
@@ -214,128 +195,7 @@ Use this space to list resources you find helpful and would like to give credit 
 [stars-url]: https://github.com/berrycakes/ruby-blog/stargazers
 [issues-shield]: https://img.shields.io/github/issues/berrycakes/ruby-blog.svg?style=for-the-badge
 [issues-url]: https://github.com/berrycakes/ruby-blog/issues
-[license-shield]: https://img.shields.io/github/license/berrycakes/ruby-blog.svg?style=for-the-badge
-[license-url]: https://github.com/berrycakes/ruby-blog/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/jiannegabriel
-[product-screenshot]: images/screenshot.png
-
-# README
-
-# Header 1
-
-## Header 2
-
-###### Header 6
-
-<h1>Using HTML Tags</h1>
-
-**bold text**
-
-_italic_
-
-_**bold italic**_
-
-## Lists
-
-- unordered bullet
-
-1. ordered list
-   - child bullet
-     1. child number
-
-## Table
-
-| Column 1   | Column 2    | Column 3                     |
-| ---------- | ----------- | ---------------------------- |
-| Data 1     | Data 2      | Data 3                       |
-| Data 10000 | Data 200000 | <ul><li>Data 3000000<ul><li> |
-
-## Links
-
-Go to [schema file](db/schema.rb)
-
-Go to [external link](https://google.com)
-
-## Images
-
-**create a docs folder for screenshots etc**
-
-![sample image](docs/img/5-Den_Dragonfly%20PPU12-03.jpeg)
-
-## Code
-
-https://pygments.org/docs/lexers/
-
-This is `inline code`
-
-```
-This is block code
-```
-
-```
-#notice {
-  color: green;
-}
-```
-
-```css
-#notice {
-  color: green;
-}
-```
-
-```rb
-module QuoteRandomizer
-    class Client
-        def self.randomize
-            response = Request.call(http_method:'get',endpoint:'/random.json')
-        end
-
-        def self.error_call
-            response = Request.call(http_method:'get',endpoint:'/randomq123.json')
-        end
-    end
-end
-```
-
-## Shields
-
-https://shields.io/
-
-![build on ruby](https://img.shields.io/static/v1?label=Build%20on&message=Ruby&color=red)
-
-![forks](https://img.shields.io/github/forks/avionschool/rails-base-project?style=social)
-
-## Variables
-
-[forks]: https://img.shields.io/github/forks/avionschool/rails-base-project?style=social
-
-![variable forks][forks]
-
-## Template inspirations
-
-https://github.com/berrycakes/ruby-blog
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-- Ruby version
-
-- System dependencies
-
-- Configuration
-
-- Database creation
-
-- Database initialization
-
-- How to run the test suite
-
-- Services (job queues, cache servers, search engines, etc.)
-
-- Deployment instructions
-
-- ...
+[product-screenshot]: https://res.cloudinary.com/dbegssigw/image/upload/v1651225611/ruby%20blog/Screen_Shot_2022-04-29_at_5.46.32_PM_ir6svp.png
+[paymongo-screenshot]: https://files.readme.io/c161595-Card_Workflow.jpg
